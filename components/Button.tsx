@@ -13,7 +13,12 @@ const Button: React.FC<Props> = ({
   return (
     <button
       className={classNames(
-        "bg-blue-800 text-sm font-sans text-white px-4 h-6 rounded-full"
+        "bg-blue-800 text-sm font-sans text-white px-4 rounded-full",
+        {
+          "h-6": size === 'normal',
+          "h-10": size === 'large',
+          "w-full": isFullWidth
+        }
       )}
       {...rest}
     />

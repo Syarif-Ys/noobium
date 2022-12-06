@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Link from "next/link";
 import Button from "../../components/Button";
 
 import NavBar from "../../components/NavBar";
@@ -18,7 +19,15 @@ const SignInPage = () => {
         <p className="font-sans text-slate-900 text-center">
           Fill the form to sign in to your account.
         </p>
-        <Button size="large" isFullWidth>Sign In</Button>
+        <Button size="large" isFullWidth>
+          Sign In
+        </Button>
+        <p className="text-slate-900 font-sans text-sm text-center mt-8">
+          Don&lsquo;t have an account ?{" "}
+          <Link href="/auth/sign-up">
+          <span className="text-blue-800">Sign up here</span>
+          </Link>
+        </p>
       </div>
     </div>
   );
