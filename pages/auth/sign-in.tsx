@@ -10,7 +10,7 @@ import TextInput from "../../components/TextInput";
 const SignInSchema = Yup.object().shape({
   email: Yup.string()
     .email("Email format is invalid")
-    .required("Email is required"),
+    .required("Email is requireds"),
   password: Yup.string().required("Password is required"),
 });
 
