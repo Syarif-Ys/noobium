@@ -1,4 +1,5 @@
 import { StringLiteral } from "typescript";
+import { parseISO, format } from 'date-fns';
 
 type Props = {
   title: string;
@@ -22,8 +23,19 @@ const Article: React.FC<Props> = ({
   date,
   author,
 }) => {
+  const formattedDate = format(parseISO(date), 'MMM dd')
   return (
     <div className="border-b border-slate-200 py-8">
+      <div className="flex items-center">
+        <img
+          className="w-6 h-6 object-cover rounded-full mr-2"
+          src={author.photo}
+          alt={author.name}
+        />
+        <p className="font-sans text-sm text-slate-900">{author.name}</p>
+        <div className="w-[2px] h-[2px] rounded-full bg-slate-400 mx-2" />
+        <p className="font-sans text-sm text-slate-400">{formattedDate}</p>
+      </div>
       <div className="flex items-center mb-8">
         <div className="mr-10">
           <h1 className="font-sans text-slate-900 font-semibold text-2xl mb-4">
