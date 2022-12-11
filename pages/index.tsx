@@ -8,7 +8,7 @@ const Home: NextPage = () => {
     return {
       id: index + 1,
       url: '/articles/how-to-learn-redux',
-      title: "Hpw to Learn Redux",
+      title: "How to Learn Redux",
       content:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Egestas etiam morbi varius sapien. Eu arcu morbi tortor rhoncus. Donec pellentesque diam orci enim, nibh diam. Nulla id ut risus quisque felis tristique metus...",
       thumbnail: "/images/dummy-article-thumbnail.png",
@@ -28,7 +28,7 @@ const Home: NextPage = () => {
       </Head>
 
       <NavBar />
-      <div className="w-[720px] wx-auto py-24">
+      <div className="w-[720px] mx-auto py-24">
         {articles.map((article) => (
           <Article
             key={article.id}
