@@ -1,13 +1,22 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import Article from "../components/Article";
+import Category from "../components/Category";
 import NavBar from "../components/NavBar";
 
 const Home: NextPage = () => {
+const categories = [...Array(10)].map((_, index) => {
+  return {
+    id: index + 1,
+    slug: 'technolog',
+    name: 'Technology',
+  }
+})
+
   const articles = [...Array(4)].map((_, index) => {
     return {
       id: index + 1,
-      url: '/articles/how-to-learn-redux',
+      slug: 'how-to-learn-redux',
       title: "How to Learn Redux",
       content:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Egestas etiam morbi varius sapien. Eu arcu morbi tortor rhoncus. Donec pellentesque diam orci enim, nibh diam. Nulla id ut risus quisque felis tristique metus...",
@@ -29,10 +38,16 @@ const Home: NextPage = () => {
 
       <NavBar />
       <div className="w-[720px] mx-auto py-24">
+        <div>
+          <p>Your Categories</p>
+          {categories.map(category => (
+            <Category key={category.id} label={category.name} />
+          ))}
+        </div>
         {articles.map((article) => (
           <Article
             key={article.id}
-            url={article.url}
+            url={'/articles/${article.slug}'}
             title={article.title}
             content={article.content}
             thumbnail={article.thumbnail}
