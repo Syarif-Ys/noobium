@@ -38,11 +38,13 @@ const categories = [...Array(10)].map((_, index) => {
 
       <NavBar />
       <div className="w-[720px] mx-auto py-24">
-        <div>
-          <p>Your Categories</p>
+        <div className="mb-16 ">
+          <p className="font-sans text-slate-900 text-sm mb-4">Your Categories</p>
+          <div className="flex flex-wrap gap-3">
           {categories.map(category => (
             <Category key={category.id} label={category.name} />
           ))}
+          </div>
         </div>
         {articles.map((article) => (
           <Article
