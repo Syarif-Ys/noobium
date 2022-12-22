@@ -10,6 +10,10 @@ const AccountDropdown: React.FC<Props> = ({}) => {
         <p className="font-sans text-slate-900 font-bold">{user.name}</p>
         <p className="font-sans text-slate-400 text-xs">{user.email}</p>
     </div>
+
+    <div className="p-4">
+      
+    </div>
   </div>;
 };
 
