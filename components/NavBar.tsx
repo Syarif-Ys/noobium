@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { useState } from "react";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { MdSearch } from "react-icons/md";
 import AccountDropdown from "./AccountDropdown";
 import Button from "./Button";
@@ -9,8 +10,13 @@ type Props = {};
 const NavBar: React.FC<Props> = () => {
   const [keyword, setKeyword] = useState("");
   const [isDropDownOpen, setIsDropDownOpen] = useState("false");
+  const router = useRouter()
 
-  const isLoggedIn = true
+  const isLoggedIn = true;
+
+  useEffect(() => {
+    setKeyword(router.query.keyword as string || '')
+  }, [router.query.keyword])
 
   return (
     <header className="h-16 border-b border-slate-200 flex items-center justify-between px-24">
@@ -26,19 +32,24 @@ const NavBar: React.FC<Props> = () => {
           placeholder="Search"
           value={keyword}
           onChange={(Event) => setKeyword(Event.target.value)}
+          onKeyDown={(event) => {
+            if (event.key === 'Enter') {
+              router.push('/search?keyword=${keyword}');
+            }
+          }}
         />
       </div>
 
       {isLoggedIn && (
         <div className="relative">
-        <button onClick={() => setIsDropDownOpen(!isDropDownOpen)}>
-          <img
-            className="w-10 h-10 rounded-full object-cover"
-            src="/images/dummy-avatar.png"
-            alt="John Doe"
-          />
-        </button>
-        {isDropDownOpen && <AccountDropdown />}
+          <button onClick={() => setIsDropDownOpen(!isDropDownOpen)}>
+            <img
+              className="w-10 h-10 rounded-full object-cover"
+              src="/images/dummy-avatar.png"
+              alt="John Doe"
+            />
+          </button>
+          {isDropDownOpen && <AccountDropdown />}
         </div>
       )}
       {!isLoggedIn && (
