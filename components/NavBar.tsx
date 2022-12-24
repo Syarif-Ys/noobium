@@ -9,14 +9,16 @@ type Props = {};
 
 const NavBar: React.FC<Props> = () => {
   const [keyword, setKeyword] = useState("");
-  const [isDropDownOpen, setIsDropDownOpen] = useState("false");
-  const router = useRouter()
+  //const [isDropDownOpen, setIsDropDownOpen] = useState("false");
+  const [isDropDownOpen, setIsDropDownOpen] = useState(false);
+  const router = useRouter();
 
   const isLoggedIn = true;
 
   useEffect(() => {
-    setKeyword(router.query.keyword as string || '')
-  }, [router.query.keyword])
+    //setKeyword((router.query.keyword as string) || "");
+    setKeyword((router.query.keyword as string) || "");
+  }, [router.query.keyword]);
 
   return (
     <header className="h-16 border-b border-slate-200 flex items-center justify-between px-24">
@@ -31,10 +33,11 @@ const NavBar: React.FC<Props> = () => {
           type="text"
           placeholder="Search"
           value={keyword}
-          onChange={(Event) => setKeyword(Event.target.value)}
+          onChange={(event) => setKeyword(event.target.value)}
           onKeyDown={(event) => {
-            if (event.key === 'Enter') {
-              router.push('/search?keyword=${keyword}');
+            if (event.key === "Enter") {
+              //router.push("/search?keyword=${keyword}");
+              router.push(`/search?keyword=${keyword}`);
             }
           }}
         />
