@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import Head from "next/head";
+import Link from "next/link";
 import Article from "../components/Article";
 import Category from "../components/Category";
 import NavBar from "../components/NavBar";
@@ -42,7 +43,9 @@ const categories = [...Array(10)].map((_, index) => {
           <p className="font-sans text-slate-900 text-sm mb-4">Your Categories</p>
           <div className="flex flex-wrap gap-3">
           {categories.map(category => (
-            <Category key={category.id} label={category.name} />
+            <Link key={category.id}  href={`/categories/${category.slug}`}>
+            <Category label={category.name} />
+            </Link>
           ))}
           </div>
         </div>

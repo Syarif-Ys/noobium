@@ -1,13 +1,9 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { useRouter } from "next/router";
-import Article from "../components/Article";
-import Category from "../components/Category";
-import NavBar from "../components/NavBar";
+import Article from "../../components/Article";
+import NavBar from "../../components/NavBar";
 
-const SearchPage: NextPage = () => {
-  const router = useRouter()
-
+const CategoryArticlesPage: NextPage = () => {
   const articles = [...Array(4)].map((_, index) => {
     return {
       id: index + 1,
@@ -27,16 +23,16 @@ const SearchPage: NextPage = () => {
   return (
     <div>
       <Head>
-        <title>Results for {router.query.keyword} | Noobium</title>
+        <title>Technology | Noobium</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <NavBar />
       <div className="w-[720px] mx-auto py-24">
         <div className="mb-16 ">
-          <p className="font-sans font-bold text-slate-400 mb-3">Results For</p>
+          <p className="font-sans font-bold text-slate-400 mb-3">Category</p>
           <p className="font-sans font-bold text-slate-900 text-5xl">
-            {router.query.keyword}
+            Technology
           </p>
         </div>
         {articles.map((article) => (
@@ -56,4 +52,4 @@ const SearchPage: NextPage = () => {
   );
 };
 
-export default SearchPage;
+export default CategoryArticlesPage;
