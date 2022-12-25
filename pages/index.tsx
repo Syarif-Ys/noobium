@@ -9,7 +9,7 @@ const Home: NextPage = () => {
 const categories = [...Array(10)].map((_, index) => {
   return {
     id: index + 1,
-    slug: 'technolog',
+    slug: 'technology',
     name: 'Technology',
   }
 })
