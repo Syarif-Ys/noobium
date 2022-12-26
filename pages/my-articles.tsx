@@ -1,12 +1,14 @@
 import type { NextPage } from "next";
 import Head from "next/head";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import Article from "../components/Article";
+import Button from "../components/Button";
 import Category from "../components/Category";
 import NavBar from "../components/NavBar";
 
 const MyArticlesPage: NextPage = () => {
-  const router = useRouter()
+  const router = useRouter();
 
   const articles = [...Array(4)].map((_, index) => {
     return {
@@ -27,17 +29,21 @@ const MyArticlesPage: NextPage = () => {
   return (
     <div>
       <Head>
-        <title>Results for {router.query.keyword} | Noobium</title>
+        <title>My Articles | Noobium</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <NavBar />
+      <NavBar hasSearchInput={false} />
       <div className="w-[720px] mx-auto py-24">
-        <div className="mb-16 ">
-          <p className="font-sans font-bold text-slate-400 mb-3">Results For</p>
+        <div className="mb-16 flex items-center justify-between">
           <p className="font-sans font-bold text-slate-900 text-5xl">
-            {router.query.keyword}
+            My Articles
           </p>
+          <Link href="/my-articles/create">
+            <Button type="button" size="large">
+              Write an Article
+            </Button>
+          </Link>
         </div>
         {articles.map((article) => (
           <Article
@@ -49,6 +55,7 @@ const MyArticlesPage: NextPage = () => {
             category={article.category}
             date={article.date}
             author={article.author}
+            hasOptions
           />
         ))}
       </div>
