@@ -28,6 +28,7 @@ const CreateArticlePage: NextPage = () => {
           value=""
         />
         <ThumbnailPicker />
+        <textarea placeholder="Write an article here..." />
       </div>
     </div>
   );
