@@ -1,4 +1,5 @@
 import classnames from "classnames";
+
 type Props = {
   label: string;
   isSelected?: boolean;
