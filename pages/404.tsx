@@ -22,8 +22,8 @@ const NotFoundPage: NextPage = () => {
 
       <NavBar hasSearchInput={false} />
       <div
-        style={{ height: "calc(188vh - 4rem)" }}
-        className="w-[720px] flex flex-col items-center mx-auto py-24"
+        style={{ height: "calc(100vh - 4rem)" }}
+        className="w-[720px] flex flex-col items-center justify-center mx-auto py-24"
       >
         <h1 className="text-8xl text-slate-900 font-sans text-center font-bold mb-6">
           404
