@@ -27,6 +27,12 @@ const NavBar: React.FC<Props> = ({
 
   const isLoggedIn = true;
 
+  const user = {
+    fullname: "John Doe",
+    email: "john.doe@gmail.com",
+    photo: "/images/dummy-avatar.png",
+  }
+
   useEffect(() => {
     //setKeyword((router.query.keyword as string) || "");
     setKeyword((router.query.keyword as string) || "");
@@ -75,8 +81,8 @@ const NavBar: React.FC<Props> = ({
             <button onClick={() => setIsDropDownOpen(!isDropDownOpen)}>
               <img
                 className="w-10 h-10 rounded-full object-cover"
-                src="/images/dummy-avatar.png"
-                alt="John Doe"
+                src= {user.photo}
+                alt= {user.fullname}
               />
             </button>
             {isDropDownOpen && <AccountDropdown />}
