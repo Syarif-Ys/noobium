@@ -4,20 +4,17 @@ import Link from "next/link";
 import Article from "../components/Article";
 import Category from "../components/Category";
 import NavBar from "../components/NavBar";
+import Loading from "react-spinners/BeatLoader";
+
+import useCategoriesQuery from "../hooks/queries/use-categories-query";
 
 const Home: NextPage = () => {
-const categories = [...Array(10)].map((_, index) => {
-  return {
-    id: index + 1,
-    slug: 'technology',
-    name: 'Technology',
-  }
-})
+  const categoriesQuery = useCategoriesQuery();
 
   const articles = [...Array(4)].map((_, index) => {
     return {
       id: index + 1,
-      slug: 'how-to-learn-redux',
+      slug: "how-to-learn-redux",
       title: "How to Learn Redux",
       content:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Egestas etiam morbi varius sapien. Eu arcu morbi tortor rhoncus. Donec pellentesque diam orci enim, nibh diam. Nulla id ut risus quisque felis tristique metus...",
@@ -40,19 +37,30 @@ const categories = [...Array(10)].map((_, index) => {
       <NavBar />
       <div className="w-[720px] mx-auto py-24">
         <div className="mb-16 ">
-          <p className="font-sans text-slate-900 text-sm mb-4">Your Categories</p>
-          <div className="flex flex-wrap gap-3">
-          {categories.map(category => (
-            <Link key={category.id}  href={`/categories/${category.slug}`}>
-            <Category label={category.name} />
-            </Link>
-          ))}
-          </div>
+          {categoriesQuery.isSuccess && (
+            <>
+              <p className="font-sans text-slate-900 text-sm mb-4">
+                Your Categories
+              </p>
+              <div className="flex flex-wrap gap-3">
+                {categoriesQuery.data.map((category) => (
+                  <Link key={category.id} href={`/categories/${category.slug}`}>
+                    <Category label={category.name} />
+                  </Link>
+                ))}
+              </div>
+            </>
+          )}
+          {categoriesQuery.isLoading && (
+            <div className="flext justify-center">
+              <Loading size={16} color="rgb(30 64 175)" />
+            </div>
+          )}
         </div>
         {articles.map((article) => (
           <Article
             key={article.id}
-            url={'/articles/${article.slug}'}
+            url={"/articles/${article.slug}"}
             title={article.title}
             content={article.content}
             thumbnail={article.thumbnail}
