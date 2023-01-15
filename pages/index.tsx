@@ -5,28 +5,13 @@ import Article from "../components/Article";
 import Category from "../components/Category";
 import NavBar from "../components/NavBar";
 import Loading from "react-spinners/BeatLoader";
-
 import useCategoriesQuery from "../hooks/queries/use-categories-query";
+import useArticlesQuery from "../hooks/queries/use-articles-query";
 
 const Home: NextPage = () => {
   const categoriesQuery = useCategoriesQuery();
+  const articlesQuery = useArticlesQuery();
 
-  const articles = [...Array(4)].map((_, index) => {
-    return {
-      id: index + 1,
-      slug: "how-to-learn-redux",
-      title: "How to Learn Redux",
-      content:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Egestas etiam morbi varius sapien. Eu arcu morbi tortor rhoncus. Donec pellentesque diam orci enim, nibh diam. Nulla id ut risus quisque felis tristique metus...",
-      thumbnail: "/images/dummy-article-thumbnail.png",
-      category: "Technology",
-      date: "2022-09-20 16:00:00",
-      author: {
-        name: "John Doe",
-        photo: "/images/dummy-avatar.png",
-      },
-    };
-  });
   return (
     <div>
       <Head>
@@ -57,18 +42,30 @@ const Home: NextPage = () => {
             </div>
           )}
         </div>
-        {articles.map((article) => (
-          <Article
-            key={article.id}
-            url={"/articles/${article.slug}"}
-            title={article.title}
-            content={article.content}
-            thumbnail={article.thumbnail}
-            category={article.category}
-            date={article.date}
-            author={article.author}
-          />
-        ))}
+
+        {articlesQuery.isSuccess && (
+          <>
+            {articlesQuery.data.pages.map((page) => (
+              <>
+                {page.data.map((article) => (
+                  <Article
+                    key={article.id}
+                    url={"/articles/${article.slug}"}
+                    title={article.title}
+                    content={article.content_preview}
+                    thumbnail={article.feature_image}
+                    category={article.category.name}
+                    date={article.created_at}
+                    author={{
+                      name: article.user.name,
+                      photo: article.user.picture,
+                    }}
+                  />
+                ))}
+              </>
+            ))}
+          </>
+        )}
       </div>
     </div>
   );
